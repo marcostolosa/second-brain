@@ -16,9 +16,10 @@ from .frontmatter import parse, validate
 
 __all__ = ["LintReport", "lint_vault"]
 
-_WIKILINK = re.compile(r"\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]")
+# Match [[links]] but NOT ![[embeds]] (transclusions may target non-wiki files).
+_WIKILINK = re.compile(r"(?<!!)\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]")
 # Pages that are hubs by nature and should not be flagged as orphans.
-_HUB_PAGES = {"index", "overview", "log"}
+_HUB_PAGES = {"index", "overview", "log", "home"}
 
 
 @dataclass
