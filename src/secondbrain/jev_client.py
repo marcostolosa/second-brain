@@ -94,7 +94,16 @@ class JevClient:
     def _noul(self, state: dict, question: str) -> tuple[float, str]:
         if self.mode == "live":
             try:
-                data = self._post({"dup": {"op": "noul", "prompt": question}}, state)
+                # TypeSafe noul: instructions = the yes/no statement; criteria has
+                # optional true/false clarifiers. Answer: {"noul": P(yes)}.
+                data = self._post({"dup": {
+                    "type": "noul",
+                    "instructions": question,
+                    "criteria": {
+                        "true": "O index JA lista uma pagina para a MESMA fonte (duplicata exata).",
+                        "false": "Fonte nova, ou apenas atualizacao, ainda nao listada.",
+                    },
+                }}, state)
                 ans = (data.get("answers") or {}).get("dup") or {}
                 return float(ans.get("noul", 0.0)), "live"
             except JevUnavailable:
@@ -104,8 +113,11 @@ class JevClient:
     def _choice(self, state: dict, question: str, options: dict) -> tuple[str, float, str]:
         if self.mode == "live":
             try:
+                # TypeSafe choice: criteria is a map name->description (required);
+                # instructions is what to decide. Answer: {"choice","confidence","probabilities"}.
                 data = self._post(
-                    {"depth": {"op": "choice", "prompt": question, "options": options}}, state
+                    {"depth": {"type": "choice", "instructions": question, "criteria": options}},
+                    state,
                 )
                 ans = (data.get("answers") or {}).get("depth") or {}
                 return (str(ans.get("choice", "other")), float(ans.get("confidence", 0.0)), "live")
@@ -129,9 +141,11 @@ class JevClient:
             try:
                 r = requests.post(self.url, json=payload, headers=headers, timeout=self.timeout)
                 if r.status_code == 200:
+                    data = r.json()
                     if self.db is not None:
-                        self.db.record_usage("jev", calls=1)
-                    return r.json()
+                        toks = int(((data.get("usage") or {}).get("input_tokens")) or 0)
+                        self.db.record_usage("jev", calls=1, tokens=toks)
+                    return data
                 if r.status_code in (429,) or r.status_code >= 500:
                     last_err = JevUnavailable(f"HTTP {r.status_code}")
                 else:
