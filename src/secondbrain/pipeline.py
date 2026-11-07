@@ -335,7 +335,11 @@ def _mechanical_curate(cfg: Config, item: Item) -> None:
     wiki.mkdir(parents=True, exist_ok=True)
     log = wiki / "log.md"
     if not log.exists():
-        log.write_text("---\nid: log\ntitle: Log\ntype: log\n---\n\n# Log\n\n", encoding="utf-8")
+        log.write_text(
+            f"---\nid: log\ntitle: Log\ntype: log\nstatus: active\n"
+            f"created: {now_iso()}\n---\n\n# Log\n\n",
+            encoding="utf-8",
+        )
     line = f"## [{now_iso()[:10]}] ingest | {item.title or item.id} | {item.summary_path}\n"
     with open(log, "a", encoding="utf-8") as fh:
         fh.write(line)
