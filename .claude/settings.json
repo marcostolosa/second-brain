@@ -27,9 +27,7 @@
     "allow": [
       "Read(./**)",
       "Edit(./wiki/**)",
-      "Write(./wiki/**)",
       "Edit(./reports/**)",
-      "Write(./reports/**)",
       "Bash(obsidian:*)",
       "Bash(python scripts/route.py:*)",
       "Bash(python scripts/lint_vault.py:*)",
