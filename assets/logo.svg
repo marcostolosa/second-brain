@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 220" width="820" height="220" role="img" aria-label="SecondBrain — Personal LLM Wiki">
+  <defs>
+    <linearGradient id="neon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#36f9c7"/>
+      <stop offset="1" stop-color="#3aa0ff"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect x="1" y="1" width="818" height="218" rx="18" fill="#0a0e14" stroke="#1b2430" stroke-width="2"/>
+
+  <!-- node-graph brain -->
+  <g transform="translate(118,110)" stroke="url(#neon)" stroke-width="2.2" filter="url(#glow)">
+    <g stroke-opacity="0.55">
+      <line x1="-70" y1="-18" x2="-28" y2="-44"/>
+      <line x1="-28" y1="-44" x2="18" y2="-30"/>
+      <line x1="18" y1="-30" x2="56" y2="-52"/>
+      <line x1="-70" y1="-18" x2="-40" y2="18"/>
+      <line x1="-40" y1="18" x2="0" y2="40"/>
+      <line x1="0" y1="40" x2="44" y2="30"/>
+      <line x1="44" y1="30" x2="56" y2="-52"/>
+      <line x1="18" y1="-30" x2="0" y2="40"/>
+      <line x1="-28" y1="-44" x2="-40" y2="18"/>
+      <line x1="18" y1="-30" x2="44" y2="30"/>
+    </g>
+    <g fill="#0a0e14">
+      <circle cx="-70" cy="-18" r="7" fill="url(#neon)"/>
+      <circle cx="-28" cy="-44" r="6" fill="url(#neon)"/>
+      <circle cx="18" cy="-30" r="8" fill="url(#neon)"/>
+      <circle cx="56" cy="-52" r="6" fill="url(#neon)"/>
+      <circle cx="-40" cy="18" r="6" fill="url(#neon)"/>
+      <circle cx="0" cy="40" r="8" fill="url(#neon)"/>
+      <circle cx="44" cy="30" r="6" fill="url(#neon)"/>
+    </g>
+  </g>
+
+  <!-- wordmark -->
+  <g font-family="'JetBrains Mono','DejaVu Sans Mono',Consolas,monospace">
+    <text x="238" y="98" font-size="52" font-weight="700" fill="#e8f1ff" letter-spacing="1">
+      SECOND<tspan fill="url(#neon)">//</tspan>BRAIN
+    </text>
+    <text x="240" y="134" font-size="20" fill="#8aa0b4">Personal LLM Wiki — Claude · Obsidian · Jev</text>
+    <text x="240" y="164" font-size="15" fill="#4f6b7e" letter-spacing="2">LOCAL-FIRST · PT-BR · WINDOWS 11</text>
+  </g>
+
+  <rect x="238" y="112" width="300" height="2" fill="url(#neon)" opacity="0.35"/>
+</svg>

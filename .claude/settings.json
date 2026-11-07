@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./state/**)",
+      "Read(./backups/**)",
+      "Read(./**/*.key)",
+      "Read(./**/*.pem)",
+      "Edit(./raw/**)",
+      "Write(./raw/**)",
+      "Edit(./.env)",
+      "Write(./.env)",
+      "Edit(./state/**)",
+      "Write(./state/**)",
+      "WebFetch",
+      "Bash(rm:*)",
+      "Bash(rmdir:*)",
+      "Bash(del:*)",
+      "Bash(Remove-Item:*)",
+      "Bash(format:*)",
+      "Bash(curl:*)",
+      "Bash(Invoke-WebRequest:*)",
+      "Bash(reg:*)",
+      "Bash(schtasks:*)"
+    ],
+    "allow": [
+      "Read(./**)",
+      "Edit(./wiki/**)",
+      "Write(./wiki/**)",
+      "Edit(./reports/**)",
+      "Write(./reports/**)",
+      "Bash(obsidian:*)",
+      "Bash(python scripts/route.py:*)",
+      "Bash(python scripts/lint_vault.py:*)",
+      "Bash(python scripts/build_index.py:*)",
+      "Bash(git status:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)"
+    ],
+    "ask": [
+      "Write(./.claude/**)",
+      "Edit(./.claude/**)",
+      "Edit(./CLAUDE.md)",
+      "Bash(git push:*)"
+    ]
+  }
+}

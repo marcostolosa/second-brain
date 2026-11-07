@@ -1,0 +1,67 @@
+# === SecondBrain .gitignore ===
+# Git is LOCAL versioning/recovery only. It is NOT a sync channel and NOT a backup.
+# Secrets, operational state, logs and backups must never be committed.
+
+# --- Secrets ---
+.env
+*.key
+*.pem
+config/config.yaml
+config/*.local.yaml
+
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+
+# --- Operational (reconstructible / machine-local) ---
+state/
+logs/
+backups/
+
+# --- Network / extraction cache ---
+*.cache
+.cache/
+
+# --- Large binary captures (kept local; recovered from backup, not Git) ---
+raw/assets/*
+!raw/assets/.gitkeep
+
+# === PERSONAL VAULT CONTENT — never published ===
+# This repo is the PROJECT/framework. Your captures and generated knowledge stay
+# local (recover them via Obsidian Sync + backups, not Git). Only the empty
+# structure + seeds are tracked.
+raw/inbox/*
+!raw/inbox/.gitkeep
+raw/archive/*
+!raw/archive/.gitkeep
+wiki/sources/*
+!wiki/sources/.gitkeep
+wiki/entities/*
+!wiki/entities/.gitkeep
+wiki/concepts/*
+!wiki/concepts/.gitkeep
+wiki/questions/*
+!wiki/questions/.gitkeep
+wiki/index.md
+wiki/log.md
+reports/latest.md
+reports/history/*
+!reports/history/.gitkeep
+
+# --- OS / editor ---
+Thumbs.db
+desktop.ini
+.DS_Store
+.obsidian/workspace*
+.obsidian/cache
+
+# Keep empty tracked dirs
+!**/.gitkeep

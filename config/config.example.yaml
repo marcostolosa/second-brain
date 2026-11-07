@@ -1,0 +1,63 @@
+# === SecondBrain configuration (example) ===
+# Copy to config/config.yaml (git-ignored) and adjust. No secrets here —
+# the Jev token comes from Windows Credential Manager or .env, never this file.
+
+vault:
+  # Root is auto-detected as the repo root; override only if needed.
+  root: "C:\\SecondBrain"
+  # Folders the single writer manages. Mobile must not edit these concurrently.
+  wiki_dir: "wiki"
+  raw_inbox: "raw/inbox"
+  raw_assets: "raw/assets"
+  raw_archive: "raw/archive"
+  reports_dir: "reports"
+  state_dir: "state"
+  logs_dir: "logs"
+
+ingest:
+  # Hard contract limit — curation stops and proposes a review beyond this.
+  max_edits_per_source: 15
+  # Poll window used by the scheduled task (minutes).
+  poll_minutes: 20
+  # Only invoke Claude when there are eligible new items.
+  skip_if_empty: true
+
+dedupe:
+  # Local-first: canonical id + sha256 + text similarity, THEN Jev semantic check.
+  text_similarity_threshold: 0.90
+  jev_noul_threshold: 0.90
+
+routing:
+  # Sonnet only for simple lookups with high confidence; otherwise Opus.
+  sonnet_when_lookup_min_confidence: 0.85
+
+jev:
+  api_url: "https://api.typesafe.ai/v1/systemone"
+  model: "jev-latest"
+  mode: "mock"            # mock | live  (env JEV_MODE overrides)
+  timeout_seconds: 20
+  max_retries: 4
+  backoff_base_seconds: 1.5
+  # Guardrail against runaway spend; pipeline refuses live calls past this.
+  daily_call_budget: 2000
+
+fetch:
+  user_agent: "SecondBrain/0.1 (+local personal knowledge tool)"
+  timeout_seconds: 30
+  max_redirects: 5
+  max_bytes: 26214400        # 25 MiB cap on any single download
+  # SSRF defense: block private/loopback/link-local targets.
+  block_private_networks: true
+  allowed_schemes: ["http", "https"]
+
+models:
+  scout: "haiku"
+  librarian: "opus"
+  answerer_simple: "sonnet"
+  answerer_complex: "opus"
+
+obsidian:
+  # CLI needs Obsidian running + CLI enabled (Settings > General). Python checks
+  # are the always-available fallback when the CLI is unavailable.
+  cli_enabled: true
+  cli_command: "obsidian"

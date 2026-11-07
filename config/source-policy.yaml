@@ -1,0 +1,67 @@
+# === Source sensitivity & handling policy ===
+# Classifies incoming material for risk. HIGH-risk content requires MANUAL review
+# and is NEVER auto-synced, NEVER auto-sent to Jev/external models, NEVER described
+# as "read" until a human approves. Matching is advisory + enforced in Python
+# (src/secondbrain/policy.py): a match raises the item's risk and sets needs_review.
+
+default_risk: low
+
+# Domains/sources trusted for automatic public ingestion.
+public_allow_domains:
+  - "x.com"
+  - "twitter.com"
+  - "fxtwitter.com"
+  - "fixupx.com"
+  - "api.fxtwitter.com"
+  - "github.com"
+  - "raw.githubusercontent.com"
+  - "obsidian.md"
+  - "arxiv.org"
+  - "teapawt.net"
+
+# Keyword/pattern signals that elevate risk and force manual review.
+sensitive_signals:
+  high:
+    # client / engagement / identity / health / credentials
+    - "(?i)\\bclient\\b"
+    - "(?i)\\bengagement\\b"
+    - "(?i)\\bNDA\\b"
+    - "(?i)\\bconfidential\\b"
+    - "(?i)\\bpassword\\b"
+    - "(?i)\\bapi[-_ ]?key\\b"
+    - "(?i)\\bsecret\\b"
+    - "(?i)\\bssn\\b|\\bcpf\\b|\\bpassport\\b"
+    - "(?i)\\bmedical\\b|\\bhealth record\\b|\\bprontu[aá]rio\\b"
+    - "(?i)private key|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY"
+    # financial documents (bank statements, Pix, SCR/credit bureau, card, IBAN)
+    - "(?i)\\bextrato\\b|\\bbank statement\\b|\\bfatura\\b|\\bcomprovante\\b"
+    - "(?i)\\bpix\\b|\\bIBAN\\b|\\bSWIFT\\b|\\bboleto\\b|\\bSCR\\b"
+    - "(?i)\\bag[êe]ncia\\b.{0,12}\\bconta\\b|\\bsaldo\\b|\\bcart[ãa]o de cr[ée]dito\\b"
+    - "(?i)\\bita[uú]\\b|\\bnubank\\b|\\bbradesco\\b|\\bsantander\\b|\\bbanco do brasil\\b|\\bcaixa econ[oô]mica\\b"
+  medium:
+    - "(?i)\\binternal\\b"
+    - "(?i)\\bdraft\\b"
+
+# Actions per risk level.
+handling:
+  low:
+    auto_ingest: true
+    allow_sync: true
+    allow_jev: true
+  medium:
+    auto_ingest: true
+    allow_sync: true
+    allow_jev: true
+    note: "flag in report"
+  high:
+    auto_ingest: false      # becomes needs_review
+    allow_sync: false       # excluded from Obsidian Sync
+    allow_jev: false        # redact before any external call
+    note: "MANUAL REVIEW REQUIRED; consider a separate sensitive vault in the future"
+
+# Redaction patterns applied to any text BEFORE it may leave the machine (Jev/Claude).
+redact_before_external:
+  - "(?i)(api[-_ ]?key\\s*[:=]\\s*)\\S+"
+  - "(?i)(authorization:\\s*bearer\\s+)\\S+"
+  - "(?i)(password\\s*[:=]\\s*)\\S+"
+  - "BEGIN (RSA|OPENSSH|EC) PRIVATE KEY[\\s\\S]+?END (RSA|OPENSSH|EC) PRIVATE KEY"

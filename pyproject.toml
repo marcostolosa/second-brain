@@ -1,0 +1,42 @@
+[project]
+name = "secondbrain"
+version = "0.1.0"
+description = "Personal LLM Wiki / Second Brain — Claude Code + Obsidian + Jev (Windows 11, local-native)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+# Core deps chosen to be resilient on Python 3.14 (pure-Python or well-wheeled).
+dependencies = [
+    "pyyaml>=6.0.1",
+    "requests>=2.31.0",
+    "pypdf>=4.2.0",
+    "beautifulsoup4>=4.12.3",
+    "python-dateutil>=2.9.0",
+]
+
+[project.optional-dependencies]
+# Better article extraction; falls back to the built-in bs4/html.parser extractor
+# when absent (see src/secondbrain/extract.py). lxml may need a wheel for 3.14.
+extract = ["trafilatura>=1.9.0"]
+# Testing
+test = ["pytest>=8.2.0"]
+dev = ["pytest>=8.2.0", "ruff>=0.5.0"]
+
+[project.scripts]
+secondbrain = "secondbrain.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
