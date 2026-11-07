@@ -9,11 +9,10 @@
       "Read(./**/*.key)",
       "Read(./**/*.pem)",
       "Edit(./raw/**)",
-      "Write(./raw/**)",
       "Edit(./.env)",
-      "Write(./.env)",
+      "Edit(./.env.*)",
       "Edit(./state/**)",
-      "Write(./state/**)",
+      "Edit(./backups/**)",
       "WebFetch",
       "Bash(rm:*)",
       "Bash(rmdir:*)",
@@ -42,7 +41,6 @@
       "Bash(git diff:*)"
     ],
     "ask": [
-      "Write(./.claude/**)",
       "Edit(./.claude/**)",
       "Edit(./CLAUDE.md)",
       "Bash(git push:*)"
