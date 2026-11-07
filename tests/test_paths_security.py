@@ -37,8 +37,9 @@ def test_write_to_wiki_allowed(vault):
 def test_scout_agent_tools_are_restricted():
     """Scout must not have Bash/Edit (cannot touch raw or run commands)."""
     import re
-    from tests.conftest import REPO_ROOT
-    text = (REPO_ROOT / ".claude" / "agents" / "scout.md").read_text(encoding="utf-8")
+    from pathlib import Path
+    repo_root = Path(__file__).resolve().parents[1]
+    text = (repo_root / ".claude" / "agents" / "scout.md").read_text(encoding="utf-8")
     m = re.search(r"tools:\s*(.+)", text)
     tools = {t.strip() for t in m.group(1).split(",")}
     assert tools == {"Read", "Grep", "Glob", "Write"}
