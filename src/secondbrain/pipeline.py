@@ -116,7 +116,8 @@ def _classify_inbox_file(path: Path) -> tuple[str, str | None, str | None]:
 # ---------------------------------------------------------------------------
 # per-item processing
 # ---------------------------------------------------------------------------
-def process_item(cfg: Config, db: VaultDB, item: Item, *, use_claude: bool = False) -> Item:
+def process_item(cfg: Config, db: VaultDB, item: Item, *, use_claude: bool = False,
+                 skip_policy: bool = False) -> Item:
     try:
         extracted_text, extra = _fetch_and_extract(cfg, db, item)
     except _NeedsReview as e:
@@ -137,7 +138,8 @@ def process_item(cfg: Config, db: VaultDB, item: Item, *, use_claude: bool = Fal
     decision = policy.classify(url=item.canonical_url, text=extracted_text)
     item.risk = decision.risk
     db.upsert(item)
-    if decision.risk == Risk.HIGH.value or not decision.auto_ingest:
+    # skip_policy = explicit operator release after human review of a needs_review item
+    if not skip_policy and (decision.risk == Risk.HIGH.value or not decision.auto_ingest):
         return db.set_status(
             item, Status.NEEDS_REVIEW.value,
             f"sensitive ({decision.risk}): {', '.join(decision.reasons) or 'policy'}",

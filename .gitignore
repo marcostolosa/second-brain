@@ -52,6 +52,7 @@ wiki/questions/*
 !wiki/questions/.gitkeep
 wiki/index.md
 wiki/log.md
+wiki/overview.md
 reports/latest.md
 reports/history/*
 !reports/history/.gitkeep
@@ -63,8 +64,7 @@ reports/history/*
 Thumbs.db
 desktop.ini
 .DS_Store
-.obsidian/workspace*
-.obsidian/cache
+.obsidian/
 
 # Keep empty tracked dirs
 !**/.gitkeep
