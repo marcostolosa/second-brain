@@ -25,10 +25,15 @@ _SECTIONS = [
 def one_line_summary(body: str, limit: int = 140) -> str:
     for line in body.splitlines():
         s = line.strip()
-        if not s or s.startswith("#") or s.startswith("---") or s.startswith("<"):
+        if not s:
             continue
-        if s.startswith(("- ", "* ", ">")):
-            s = s.lstrip("-*> ").strip()
+        # skip headings, frontmatter rules, html, fences, italic meta, callouts/quotes
+        if s.startswith(("#", "---", "<", "```", "_", ">")):
+            continue
+        if s.startswith(("- ", "* ")):
+            s = s.lstrip("-* ").strip()
+        if s.startswith("[!") or not s:
+            continue
         return (s[:limit] + "…") if len(s) > limit else s
     return ""
 
