@@ -19,6 +19,22 @@ def test_low_risk_allows(vault):
     assert d.auto_ingest and d.allow_sync and d.allow_jev
 
 
+def test_public_tool_mention_not_blocked(vault):
+    # security tool docs mention api key / secret / password without being sensitive
+    pol = load_policy(vault.root)
+    d = pol.classify(url="https://github.com/ffuf/ffuf",
+                     text="pass your api_key, token, password or secret to authenticate")
+    assert d.risk != "high"
+    assert d.auto_ingest is True
+
+
+def test_real_engagement_still_high(vault):
+    pol = load_policy(vault.root)
+    d = pol.classify(url=None, text="Pentest engagement report for the client, under NDA.")
+    assert d.risk == "high"
+    assert d.auto_ingest is False
+
+
 def test_redaction_strips_secrets(vault):
     pol = load_policy(vault.root)
     red = pol.redact("api_key: ABCD1234\nAuthorization: Bearer xyztoken\nhello")

@@ -21,26 +21,30 @@ public_allow_domains:
 
 # Keyword/pattern signals that elevate risk and force manual review.
 sensitive_signals:
+  # HIGH = genuinely sensitive if present in captured content -> held for review,
+  # never auto-synced/sent. Kept high-precision so public technical docs that merely
+  # discuss these topics are NOT held (those are MEDIUM below).
   high:
-    # client / engagement / identity / health / credentials
-    - "(?i)\\bclient\\b"
-    - "(?i)\\bengagement\\b"
-    - "(?i)\\bNDA\\b"
-    - "(?i)\\bconfidential\\b"
-    - "(?i)\\bpassword\\b"
-    - "(?i)\\bapi[-_ ]?key\\b"
-    - "(?i)\\bsecret\\b"
-    - "(?i)\\bssn\\b|\\bcpf\\b|\\bpassport\\b"
-    - "(?i)\\bmedical\\b|\\bhealth record\\b|\\bprontu[aá]rio\\b"
-    - "(?i)private key|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY"
+    # real embedded secret, not a mention
+    - "(?i)BEGIN (RSA|OPENSSH|EC|DSA)? ?PRIVATE KEY"
+    # engagement/legal markers (phrase-level, precise)
+    - "(?i)\\bNDA\\b|\\bnon-disclosure\\b|\\bconfidential(ity)?\\b|\\bconfidencial(idade)?\\b"
+    - "(?i)client engagement|engagement (report|letter|scope)|rules of engagement|relat[oó]rio de pentest|proposta comercial"
+    # identity documents
+    - "(?i)\\bssn\\b|\\bcpf\\b|\\brg\\b\\s*n|passport(e)? (no|number|n[uú]mero)"
+    - "(?i)\\bmedical record\\b|\\bhealth record\\b|\\bprontu[aá]rio\\b"
     # financial documents (bank statements, Pix, SCR/credit bureau, card, IBAN)
-    - "(?i)\\bextrato\\b|\\bbank statement\\b|\\bfatura\\b|\\bcomprovante\\b"
-    - "(?i)\\bpix\\b|\\bIBAN\\b|\\bSWIFT\\b|\\bboleto\\b|\\bSCR\\b"
+    - "(?i)\\bextrato\\b|\\bbank statement\\b|\\bfatura\\b|\\bcomprovante de pagamento\\b"
+    - "(?i)\\bpix\\b|\\bIBAN\\b|\\bboleto\\b|\\bSCR\\b"
     - "(?i)\\bag[êe]ncia\\b.{0,12}\\bconta\\b|\\bsaldo\\b|\\bcart[ãa]o de cr[ée]dito\\b"
     - "(?i)\\bita[uú]\\b|\\bnubank\\b|\\bbradesco\\b|\\bsantander\\b|\\bbanco do brasil\\b|\\bcaixa econ[oô]mica\\b"
+  # MEDIUM = ingested and flagged in the report, NOT held. These words are common in
+  # public technical content (tool docs, write-ups), so a mention must not block.
   medium:
-    - "(?i)\\binternal\\b"
-    - "(?i)\\bdraft\\b"
+    - "(?i)\\bpassword\\b|\\bsenha\\b"
+    - "(?i)\\bapi[-_ ]?key\\b|\\bsecret\\b|\\btoken\\b|\\bcredential\\b"
+    - "(?i)\\bclient\\b|\\bengagement\\b"
+    - "(?i)\\binternal\\b|\\bdraft\\b"
 
 # Actions per risk level.
 handling:
