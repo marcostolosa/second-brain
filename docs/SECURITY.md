@@ -34,7 +34,7 @@ and never executes downloads. Tested in `tests/test_urls.py`.
 
 ## Secrets
 The Jev token lives in Windows Credential Manager (`SecondBrain/TypeSafe`) or a
-git-ignored `.env` — never in Markdown, Git, logs, or prompts. Text is redacted
+git-ignored `.env` - never in Markdown, Git, logs, or prompts. Text is redacted
 (`policy.redact`) before any external call. Tested in `tests/test_policy.py`.
 
 ## Sensitive data
@@ -45,5 +45,5 @@ material (not created here).
 
 ## Network exposure
 None. No public HTTP API, no tunnel, no `0.0.0.0` listener, no WAN port. Tailscale
-(if used) is private admin only — strong auth, approved devices, restrictive ACLs,
+(if used) is private admin only - strong auth, approved devices, restrictive ACLs,
 never Funnel. Remote Control is the preferred way to talk to Claude from mobile.

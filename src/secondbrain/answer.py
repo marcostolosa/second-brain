@@ -33,7 +33,7 @@ class Answer:
                 f"(conf {self.confidence}) -> **{self.model}**")
         if not self.pages:
             return head + "\n\n_Nenhuma página correspondente na wiki ainda._"
-        rows = "\n".join(f"- [[{link}|{title}]] — {summ}" for link, title, summ in self.pages)
+        rows = "\n".join(f"- [[{link}|{title}]] - {summ}" for link, title, summ in self.pages)
         return head + ("\n\n**Páginas relevantes (verifique a fonte original antes de "
                        "confiar):**\n\n") + rows
 

@@ -2,8 +2,8 @@
 
 ## Scheduled tasks (Windows Task Scheduler)
 `scripts\register-tasks.ps1` registers two tasks under `\SecondBrain\`:
-- **SecondBrain Ingest** — repeats every 20 min, runs `ingest.ps1`.
-- **SecondBrain Night** — daily 02:00, runs `night.ps1`.
+- **SecondBrain Ingest** - repeats every 20 min, runs `ingest.ps1`.
+- **SecondBrain Night** - daily 02:00, runs `night.ps1`.
 
 Both run with **LogonType Interactive** (only while you are logged on), so no
 password is stored and `claude -p` runs in your authenticated context. Settings:
@@ -19,7 +19,7 @@ Get-ScheduledTaskInfo -TaskPath '\SecondBrain\' -TaskName 'SecondBrain Ingest' |
 ```
 
 ### Run while logged off (optional, manual)
-Requires storing credentials (S4U) — a deliberate choice:
+Requires storing credentials (S4U) - a deliberate choice:
 ```powershell
 # re-register the principal with -LogonType S4U (will prompt for the password)
 ```
@@ -36,13 +36,13 @@ claude -p "say ok" --model haiku --permission-mode acceptEdits --allowedTools "R
 ```
 
 ## Logs & reports
-- `logs\ingest.log`, `logs\night.log` — operational (not synced, not committed).
-- `reports\latest.md` + `reports\history\<date>.md` — queue counts, Jev usage,
+- `logs\ingest.log`, `logs\night.log` - operational (not synced, not committed).
+- `reports\latest.md` + `reports\history\<date>.md` - queue counts, Jev usage,
   link integrity, notes. A de-identified summary may be synced; raw logs stay local.
 
 ## Single writer
 One writer per vault (`state\writer.lock`). Mobile must create NEW notes in
-`raw/inbox/` and edit personal notes only — never edit `wiki/` while the librarian
+`raw/inbox/` and edit personal notes only - never edit `wiki/` while the librarian
 runs. CLI mutations take the lock; concurrent runs get `IgnoreNew`.
 
 ## Jev usage & budget

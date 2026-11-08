@@ -6,10 +6,10 @@ off-path outcomes. Idempotent: an item already past a stage is not reprocessed,
 and re-running produces no spurious changes.
 
 Two execution modes:
-  * mechanical (default, offline, deterministic) — the Python pipeline writes a
+  * mechanical (default, offline, deterministic) - the Python pipeline writes a
     normalized source page, dedupes, updates index/log. Used by tests and as a
     safe fallback.
-  * claude (use_claude=True) — the same stages, but the Scout (Haiku) and
+  * claude (use_claude=True) - the same stages, but the Scout (Haiku) and
     Librarian (Opus) agents are invoked via claude -p to produce the summary and
     curate entities/concepts. See claude_runner.py.
 """
@@ -308,7 +308,7 @@ def _write_source_page(
     )
     parts = [f"# {item.title or slug}", ""]
     if incomplete:
-        parts += ["> [!warning] Captura incompleta — conteúdo longo/mídia não recuperado "
+        parts += ["> [!warning] Captura incompleta - conteúdo longo/mídia não recuperado "
                   "por completo. Não tratar como lido na íntegra.", ""]
     if flags:
         parts += [f"> [!danger] Sinais de prompt injection detectados: {', '.join(flags)}. "
@@ -321,7 +321,7 @@ def _write_source_page(
               fenced + ("\n\n…[truncado]…" if truncated else ""), "",
               "## Proveniência", "",
               f"- Fonte: {item.source_url or item.inbox_path}",
-              f"- Canônica: {item.canonical_url or '—'}",
+              f"- Canônica: {item.canonical_url or '-'}",
               f"- SHA-256: `{item.sha256}`"]
     if extra.get("thread"):
         parts += ["", "## Thread", ""] + [f"- {p['text'][:200]}" for p in extra["thread"][:50]]

@@ -6,8 +6,8 @@ Local-native. No WSL runtime. PowerShell 7 (`pwsh`) preferred; Windows PowerShel
 ## Prerequisites (verified on this machine)
 - Windows 11 Pro (build 26300) · PowerShell 7.6.9
 - Python 3.14 (`py -3`) · Git 2.56 · Node/npm (for Claude Code)
-- Claude Code CLI 2.1.319 (`claude`) — authenticated with an eligible claude.ai account
-- Obsidian Desktop (installed) — enable the CLI at **Settings → General → Command
+- Claude Code CLI 2.1.319 (`claude`) - authenticated with an eligible claude.ai account
+- Obsidian Desktop (installed) - enable the CLI at **Settings → General → Command
   line interface** (Obsidian ≥ 1.12.7). The CLI needs Obsidian running; when it is
   not, SecondBrain uses its Python lint fallback automatically.
 
@@ -28,7 +28,7 @@ This creates `.venv`, installs pinned dependencies (`-e .[test,extract]`), copie
 # capture a link into the inbox
 .\.venv\Scripts\secondbrain capture-url "https://x.com/user/status/123" --title "a note"
 
-# process the inbox (fetch, extract, dedupe, index) — mechanical, offline-safe
+# process the inbox (fetch, extract, dedupe, index) - mechanical, offline-safe
 .\.venv\Scripts\secondbrain process-inbox
 
 # process with Scout/Librarian agents (needs claude logged in)
@@ -48,7 +48,7 @@ This creates `.venv`, installs pinned dependencies (`-e .[test,extract]`), copie
 .\scripts\backup.ps1 -Destination D:\Backups\SecondBrain -Password <pass>
 ```
 
-## Jev / TypeSafe token (optional — enables `live` routing)
+## Jev / TypeSafe token (optional - enables `live` routing)
 Stays `mock` (deterministic, offline) until you set a token:
 ```powershell
 cmdkey /generic:SecondBrain/TypeSafe /user:token /pass:<YOUR_TOKEN>

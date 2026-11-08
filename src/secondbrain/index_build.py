@@ -1,4 +1,4 @@
-"""Rebuild wiki/index.md from page frontmatter — every page with a one-line summary.
+"""Rebuild wiki/index.md from page frontmatter - every page with a one-line summary.
 
 The index is derived from the Markdown files (the source of truth), so it is
 always reconstructible. Retired/superseded pages are listed but marked.
@@ -61,7 +61,7 @@ def build_index(cfg: Config) -> Path:
             summary = one_line_summary(body)
             tag = f" `({status})`" if status in ("retired", "superseded", "needs_review") else ""
             link = f"[[{sub}/{p.stem}|{title}]]"
-            lines.append(f"- {link}{tag} — {summary}" if summary else f"- {link}{tag}")
+            lines.append(f"- {link}{tag} - {summary}" if summary else f"- {link}{tag}")
             total += 1
         lines.append("")
 

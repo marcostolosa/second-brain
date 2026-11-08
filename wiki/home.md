@@ -8,14 +8,14 @@ created: 2026-11-07T00:00:00Z
 updated: 2026-11-07T00:00:00Z
 ---
 
-# 🧠 SecondBrain — Cockpit
+# 🧠 SecondBrain - Cockpit
 
 > [!tip] Página inicial. Fixe com o 📌 (ou use o plugin **Homepage** para abrir aqui ao iniciar).
 
 ## 🚀 Navegação
-- [[index|📇 Índice]] — todas as páginas com resumo
-- [[overview|🗺️ Overview]] — a tese atual da base
-- [[log|🧾 Log]] — histórico append-only das execuções
+- [[index|📇 Índice]] - todas as páginas com resumo
+- [[overview|🗺️ Overview]] - a tese atual da base
+- [[log|🧾 Log]] - histórico append-only das execuções
 
 ## 🗂️ Áreas
 - Fontes → pasta `sources/` · Entidades → `entities/` · Conceitos → `concepts/` · Perguntas → `questions/`
@@ -43,7 +43,7 @@ Abra o **Graph view** (ícone na lateral) para ver as conexões. Dica: filtre po
 
 ---
 
-### 🔌 Versão dinâmica (opcional — requer o plugin community **Dataview**)
+### 🔌 Versão dinâmica (opcional - requer o plugin community **Dataview**)
 Instale Dataview e substitua as listas acima por blocos como estes (cole num bloco ` ```dataview `):
 
 - **Precisa de revisão:**

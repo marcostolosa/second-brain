@@ -1,8 +1,8 @@
 # Remote access & multi-device sync
 
-## Obsidian Sync — the ONE sync channel
+## Obsidian Sync - the ONE sync channel
 Use Obsidian Sync as the single sync mechanism. Do **not** also sync the same
-vault with iCloud, OneDrive, Syncthing, or Git — Git here is local versioning only.
+vault with iCloud, OneDrive, Syncthing, or Git - Git here is local versioning only.
 
 ### What to sync (Obsidian → Settings → Sync)
 - **Sync:** `wiki/`, `raw/inbox/`, `raw/archive/`, `templates/`, `CLAUDE.md`,
@@ -16,14 +16,14 @@ vault with iCloud, OneDrive, Syncthing, or Git — Git here is local versioning 
 ### Plans
 - **Standard**: 1 GB, ≤ 5 MB/file. **Plus**: 10 GB, ≤ 200 MB/file. For large PDFs
   choose Plus, or keep heavy attachments on the PC with explanatory links (mobile
-  will not have files that are not synced — do not promise otherwise).
+  will not have files that are not synced - do not promise otherwise).
 
 ### Write discipline
 `wiki/` is owned by the librarian (one writer). On mobile, create NEW notes in
 `raw/inbox/` and edit personal notes; avoid editing `wiki/` while the night job
 runs. Resolve any `*.sync-conflict` per `docs/RECOVERY.md`.
 
-## Talk to Claude from your phone — Claude Code Remote Control (preferred)
+## Talk to Claude from your phone - Claude Code Remote Control (preferred)
 ```powershell
 cd C:\SecondBrain
 claude remote-control --name "Second Brain"
@@ -44,5 +44,5 @@ restrictive ACLs. **Never** expose RDP/SSH to the WAN and **never** use Tailscal
 Funnel. Prefer Remote Control for talking to Claude; use Tailscale for OS-level
 admin only.
 
-Status: **MANUAL_PENDING** — enabling Remote Control and connecting phones require
+Status: **MANUAL_PENDING** - enabling Remote Control and connecting phones require
 your account/login and are done interactively.

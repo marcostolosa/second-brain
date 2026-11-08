@@ -1,8 +1,8 @@
-# Android capture checklist  (MANUAL — Android not present on this PC)
+# Android capture checklist  (MANUAL - Android not present on this PC)
 
 Support varies by OS/ROM; do not assume identical behavior everywhere.
 
-## 0. Prerequisite — Obsidian Sync
+## 0. Prerequisite - Obsidian Sync
 Install Obsidian on Android, open the **SecondBrain** vault via Obsidian Sync.
 Sync folder rules: see `docs/REMOTE_ACCESS.md`.
 
@@ -26,5 +26,5 @@ enriches and processes it on the next `process-inbox`.
 .\.venv\Scripts\secondbrain process-inbox
 ```
 
-Status: **MANUAL_PENDING** — run on the Android device and tick each box. Note any
+Status: **MANUAL_PENDING** - run on the Android device and tick each box. Note any
 ROM-specific share limitations here.

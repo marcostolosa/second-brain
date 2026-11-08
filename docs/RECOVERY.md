@@ -1,11 +1,11 @@
 # Recovery runbook
 
 Three independent layers: **Git** (local history), **Obsidian Sync** (device
-replication — NOT a backup), **backups** (off-vault archives). Sync is not backup;
+replication - NOT a backup), **backups** (off-vault archives). Sync is not backup;
 Git is not a backup for large assets.
 
 ## Rebuild state from the Markdown
-The SQLite queue is reconstructible — the Markdown files are the source of truth.
+The SQLite queue is reconstructible - the Markdown files are the source of truth.
 If `state/` is lost or corrupt:
 ```powershell
 Remove-Item C:\SecondBrain\state\secondbrain.sqlite3* -Force
@@ -14,7 +14,7 @@ Remove-Item C:\SecondBrain\state\secondbrain.sqlite3* -Force
 ```
 
 ## Git vs your data
-Git versions the **project/framework** only — your captures and generated wiki
+Git versions the **project/framework** only - your captures and generated wiki
 pages are git-ignored and never committed (this repo is public). So Git restores
 code/config, **not** your knowledge. Recover personal content from **Obsidian Sync**
 (other devices) or **backups** (below).
@@ -39,7 +39,7 @@ hypothesis, not a backup.
 
 ## Crash / power loss mid-ingest
 SQLite runs in WAL mode; interrupted runs leave items in an intermediate status
-(`fetching`, `extracted`, …). The next `process-inbox` resumes them idempotently —
+(`fetching`, `extracted`, …). The next `process-inbox` resumes them idempotently -
 no duplicate pages, no corruption (`tests/test_pipeline_e2e.py::test_resume_after_interruption`).
 
 ## Obsidian Sync conflicts

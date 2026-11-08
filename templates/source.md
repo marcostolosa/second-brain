@@ -21,7 +21,7 @@ provenance: summary_engine=<mechanical|scout-haiku>; kind=<tweet|article|pdf|...
 
 # {{title}}
 
-> [!warning] Capture incomplete — only set when long-form/media was not fully retrieved.
+> [!warning] Capture incomplete - only set when long-form/media was not fully retrieved.
 
 ## Summary
 <!-- Neutral summary. No invented content. -->
